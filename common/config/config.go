@@ -22,6 +22,7 @@ func InitConfig(configFile string) {
 	v.OnConfigChange(func(in fsnotify.Event) {
 		log.Println("Config file changed:", in.Name)
 	})
+
 	err := v.ReadInConfig()
 	if err != nil {
 		panic(fmt.Errorf("Read config error, err%v \n", err))
