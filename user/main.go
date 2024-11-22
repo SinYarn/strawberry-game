@@ -2,7 +2,9 @@ package main
 
 import (
 	"common/config"
+	"common/metrics"
 	"flag"
+	"fmt"
 )
 
 // 启动命令
@@ -12,6 +14,14 @@ func main() {
 	// 1. 加载配置
 	flag.Parse()
 	config.InitConfig(*configFile)
-	// 2. 启动监控 --内存
+	fmt.Println(config.Conf)
+	// 2. 启动性能监控 --内存
+	go func() {
+		err := metrics.Server(fmt.Sprintf("0.0.0.0:%d", config.Conf.MetricPort))
+		if err != nil {
+			panic(err)
+		}
+	}()
 	// 3. 启动程序 grpc服务端
+	select {}
 }
