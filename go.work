@@ -1,12 +1,12 @@
 go 1.23
 
 use (
-	gate
 	common
 	connector
 	core
 	framework
 	game
+	gate
 	hall
 	user
 )
